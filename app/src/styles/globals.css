@@ -1,27 +1,70 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  body {
+    font-family: "Poppins";
+    @apply text-base text-white font-normal px-6 py-5 bg-black;
+  }
+  h1, h2, h3, h4, h5, h6, p, a, th, td, button, input {
+    font-family: "Poppins" !important;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  a {
+    text-decoration-color: inherit !important;
+    @apply no-underline cursor-pointer !important;
+  }
+  a.link {
+    @apply text-base font-medium text-white;
+  }
+  .btn-style {
+    font-family: "Poppins";
+    box-shadow: 0px 2px 0px #3d8f17, 0px 4px 4px rgba(0, 0, 0, 0.11),
+      0px 12px 20px rgba(61, 143, 23, 0.32);
+    @apply py-4 min-w-[188px] text-center inline-block rounded-xl text-sm leading-6 font-semibold text-[#050505] normal-case no-underline relative z-[1] !important;
+    background-image: linear-gradient(
+      to right,
+      #baff00 0%,
+      #149c6b 51%,
+      #baff00 100%
+    );
+    background-size: 250% auto !important;
+    transition: 0.5s !important;
+  }
+  .btn-style:hover {
+    background-position: right center;
+  }
+
+  .header {
+  }
+  .main-panel {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    backdrop-filter: blur(84px);
+    min-height: calc(100vh - 145px);
+    @apply rounded-2xl py-8 px-4 border-[1.5px] border-[#434343] border-solid relative z-[60] !important;
+  }
+  .result {
+    height: calc(100vh - 390px);
+    @apply pt-16 flex flex-col justify-center items-center text-center !important;
+  }
+  .input input {
+    @apply text-sm text-white leading-6 w-full bg-[#ffffff14] rounded-2xl p-[18px] border-none !important;
+  }
+  .address-form {
+    @apply pb-1 text-sm leading-6 text-white opacity-60 font-normal tracking-normal !important;
+  }
+  .input div:after,
+  .input div:before {
+    @apply hidden !important;
+  }
 }
