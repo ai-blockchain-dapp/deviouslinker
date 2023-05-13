@@ -5,10 +5,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator seed {
-  provider = "prisma-seed"
-  output   = "../prisma/seed"
-}
+//generator seed {
+//  provider = "prisma-seed"
+//  output   = "../prisma/seed"
+//}
 
 datasource db {
   provider = "mysql"
@@ -18,7 +18,8 @@ datasource db {
 
 model BotCluster {
   id        Int      @id @default(autoincrement())
-  imageUrl  String
+  ipfsCid   String
+  filename  String
   addresses Address[]
 }
 

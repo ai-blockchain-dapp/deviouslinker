@@ -23,11 +23,13 @@ async function readCSVFile(filePath) {
 
 async function main() {
   const uniqueAddresses = await readCSVFile('./prisma/seed/addresses.csv');
-	const addressesData = Array.from(uniqueAddresses).map((address) => ({ address }))
+  const addressesData = Array.from(uniqueAddresses).map((address) => ({ address }))
 
   const botCluster = await prisma.botCluster.create({
     data: {
-      imageUrl: 'https://example.com/image.jpg', // it should be put on IPFS
+//			imageUrl: 'image',
+      ipfsCid: 'bafybeid2d4jdikcf7ipabyrykjib26lffnauqdpka667unuzbinuyu352y',
+      filename: 'botcluster-0x156a.png',
       addresses: {
         create: addressesData,
       },

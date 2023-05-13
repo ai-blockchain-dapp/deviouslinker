@@ -80,6 +80,7 @@ You can check any address that is associated with bot activities or multi-accoun
             <Typography className="style2 pt-6">result will be here</Typography>
             {botCluster ? (
               <div>
+                <Image src={`https://ipfs.io/ipfs/${botCluster.ipfsCid}/${botCluster.filename}`} width="100" height="100" alt="cluser image" className="block img-full mx-auto" />
                 <h3>{botCluster.addresses.length} addresses found in the cluster</h3>
                 <Tooltip title={<AddressList addresses={botCluster.addresses} />} arrow>
                   <span>View Addresses</span>
