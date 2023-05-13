@@ -5,6 +5,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator seed {
+  provider = "prisma-seed"
+  output   = "../prisma/seed"
+}
+
 datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")

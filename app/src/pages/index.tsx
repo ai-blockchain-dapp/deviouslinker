@@ -3,12 +3,22 @@ import Image from "next/image";
 import { useState } from 'react';
 import logo from "../../public/DEVIOUSLINKER.png";
 import { Poppins } from "next/font/google";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button, Tooltip } from "@mui/material";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700", "600"],
 });
+
+function AddressList({ addresses }) {
+  return (
+    <ul>
+      {addresses.map((address) => (
+        <li key={address.id}>{address.address}</li>
+      ))}
+    </ul>
+  );
+}
 
 export default function Home() {
   const [address, setAddress] = useState('');
@@ -70,14 +80,10 @@ You can check any address that is associated with bot activities or multi-accoun
             <Typography className="style2 pt-6">result will be here</Typography>
             {botCluster ? (
               <div>
-                <h2>BotCluster Details:</h2>
-                <p>Image URL: {botCluster.imageUrl}</p>
-                <h3>Addresses:</h3>
-                <ul>
-                  {botCluster.addresses.map((address) => (
-                    <li key={address.id}>{address.address}</li>
-                  ))}
-                </ul>
+                <h3>{botCluster.addresses.length} addresses found in the cluster</h3>
+                <Tooltip title={<AddressList addresses={botCluster.addresses} />} arrow>
+                  <span>View Addresses</span>
+                </Tooltip>
               </div>
             ) : (
               <p>No BotCluster found.</p>
