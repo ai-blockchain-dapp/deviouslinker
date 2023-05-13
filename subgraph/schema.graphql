@@ -1,0 +1,9 @@
+type BotRegistered @entity(immutable: true) {
+  id: Bytes!
+  botAddress: Bytes! # address
+  isBot: Boolean! # bool
+  score: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

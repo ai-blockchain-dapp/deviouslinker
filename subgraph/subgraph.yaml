@@ -1,0 +1,24 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: BotRepo
+    network: mumbai
+    source:
+      address: "0xA86219A70D906CC913e447DC2fA46B8C8D0647e7"
+      abi: BotRepo
+      startBlock: 35556694
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BotRegistered
+      abis:
+        - name: BotRepo
+          file: ./abis/BotRepo.json
+      eventHandlers:
+        - event: BotRegistered(indexed address,bool,uint256)
+          handler: handleBotRegistered
+      file: ./src/bot-repo.ts
