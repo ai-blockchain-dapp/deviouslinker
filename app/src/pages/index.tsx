@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from 'react';
 import logo from "../../public/DEVIOUSLINKER.png";
 import { Poppins } from "next/font/google";
-import { Box, Typography, TextField, Button, Tooltip } from "@mui/material";
+import { Box, Typography, TextField, Button, Tooltip, Grid, Dialog } from "@mui/material";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,6 +23,7 @@ function AddressList({ addresses }) {
 export default function Home() {
   const [address, setAddress] = useState('');
   const [botCluster, setBotCluster] = useState(null);
+  const [searched, setSearched] = useState(null);
 
   const handleSearch = async () => {
     try {
@@ -40,10 +41,21 @@ export default function Home() {
       } else {
         setBotCluster(null);
       }
+      setSearched(true);
     } catch (error) {
       console.error(error);
       setBotCluster(null);
     }
+  };
+
+  const [isImageOpen, setIsImageOpen] = useState(false);
+
+  const handleImageClick = () => {
+    setIsImageOpen(true);
+  };
+
+  const handleCloseImage = () => {
+    setIsImageOpen(false);
   };
 
   return (
@@ -76,18 +88,48 @@ You can check any address that is associated with bot activities or multi-accoun
               <Button className="btn-style" onClick={handleSearch}>Search</Button>
             </form>
           </Box>
-          <Box className="result">
-            <Typography className="style2 pt-6">result will be here</Typography>
+          <Box className="mt-8">
             {botCluster ? (
-              <div>
-                <Image src={`https://ipfs.io/ipfs/${botCluster.ipfsCid}/${botCluster.filename}`} width="100" height="100" alt="cluser image" className="block img-full mx-auto" />
-                <h3>{botCluster.addresses.length} addresses found in the cluster</h3>
-                <Tooltip title={<AddressList addresses={botCluster.addresses} />} arrow>
-                  <span>View Addresses</span>
-                </Tooltip>
-              </div>
+              <Box className="w-full">
+                <Typography className="address-form">Bot Cluster</Typography>
+                  <Grid container direction="column">
+                    <Grid item>
+                      <Grid item>
+                        <Typography className="pt-4 text-white text-opacity-[.68] max-w-[880px]">
+                          <Tooltip title={<AddressList addresses={botCluster.addresses} />} arrow>
+                          <span style={{color: '#149C6B', fontWeight: 'bold' }}>{botCluster.addresses.length}</span>
+                        </Tooltip>
+                        &nbsp;addresses found in the cluster
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <Image
+                        src={`https://ipfs.io/ipfs/${botCluster.ipfsCid}/${botCluster.filename}`}
+                        width="450"
+                        height="300"
+                        alt="cluster image"
+                        className="block img-full mx-auto"
+                        style={{ margin: '0 auto', cursor: 'pointer' }}
+                        onClick={handleImageClick}
+                      />
+                      <Dialog open={isImageOpen} onClose={handleCloseImage} maxWidth="false">
+                        <Image
+                          src={`https://ipfs.io/ipfs/${botCluster.ipfsCid}/${botCluster.filename}`}
+                          alt="cluster image"
+                          width="1189"
+                          height="790"
+                        />
+                      </Dialog>
+                    </Grid>
+                  </Grid>
+              </Box>
             ) : (
-              <p>No BotCluster found.</p>
+              searched ? (
+                <p>No BotCluster found.</p>
+              ) : (
+                <p></p>
+              )
             )}
           </Box>
         </Box>
