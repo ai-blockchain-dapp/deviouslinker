@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import React from "react";
+import { useState } from 'react';
 import logo from "../../public/DEVIOUSLINKER.png";
 import { Poppins } from "next/font/google";
 import { Box, Typography, TextField, Button } from "@mui/material";
@@ -11,6 +11,31 @@ const poppins = Poppins({
 });
 
 export default function Home() {
+  const [address, setAddress] = useState('');
+  const [botCluster, setBotCluster] = useState(null);
+
+  const handleSearch = async () => {
+    try {
+      const response = await fetch('/api/getBotClusterByAddress', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ address }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setBotCluster(data);
+      } else {
+        setBotCluster(null);
+      }
+    } catch (error) {
+      console.error(error);
+      setBotCluster(null);
+    }
+  };
+
   return (
     <main className={` ${poppins.className} `}>
       <header className="header flex items-center justify-between">
@@ -34,17 +59,32 @@ You can check any address that is associated with bot activities or multi-accoun
                   label=""
                   variant="standard"
                   className="input w-full"
-                  placeholder="Input blockchain address..." />
+                  placeholder="Input blockchain address..."
+                  onChange={(e) => setAddress(e.target.value)} 
+                 />
               </Box>
-              <Button className="btn-style">Send</Button>
+              <Button className="btn-style" onClick={handleSearch}>Search</Button>
             </form>
           </Box>
           <Box className="result">
             <Typography className="style2 pt-6">result will be here</Typography>
+            {botCluster ? (
+              <div>
+                <h2>BotCluster Details:</h2>
+                <p>Image URL: {botCluster.imageUrl}</p>
+                <h3>Addresses:</h3>
+                <ul>
+                  {botCluster.addresses.map((address) => (
+                    <li key={address.id}>{address.address}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p>No BotCluster found.</p>
+            )}
           </Box>
         </Box>
       </Box>
     </main>
   );
 };
-
