@@ -9,6 +9,8 @@ contract BotRepo {
 
     mapping(address => BotData) public botRepository;
 
+    event BotRegistered(address indexed botAddress, bool isBot, uint256 score);
+
     function isBot(address _address) public view returns (bool) {
         return botRepository[_address].isBot;
     }
@@ -19,6 +21,7 @@ contract BotRepo {
 
     function register(address _address, bool _isBot, uint256 _score) public {
         botRepository[_address] = BotData(_isBot, _score);
+        emit BotRegistered(_address, _isBot, _score);
     }
 }
 
