@@ -4,7 +4,7 @@ async function retrieveDataByAddress(addressToRetrieve) {
   const BotRepo = await ethers.getContractFactory("BotRepo");
   const signer = await ethers.getSigner();
 
-  const contractAddress = "0x65d8A5fa2228C1Bca5f9Cfd0A4Cae55453648EdA";
+  const contractAddress = "0xA86219A70D906CC913e447DC2fA46B8C8D0647e7";
   const botRepo = await BotRepo.attach(contractAddress).connect(signer);
 
   const isBot = await botRepo.isBot(addressToRetrieve);
