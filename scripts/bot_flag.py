@@ -7,7 +7,7 @@ from tqdm import tqdm
 api_url = "https://api.polygonscan.com/api"
 
 # PolygonScan API key
-api_key = "I1ABHF2Z7QKPARYT5YZ1X46WWVE2ENEUT1"
+api_key = ""
 
 # Input CSV file path
 input_file = "input.csv"
