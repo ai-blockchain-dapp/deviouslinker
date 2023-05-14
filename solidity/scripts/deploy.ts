@@ -6,7 +6,13 @@ async function main() {
   console.log("Deploying contracts with the account:", deployer.address);
 
   const BotRepo = await ethers.getContractFactory("BotRepo");
-  const botRepo = await BotRepo.deploy();
+
+  // Set the gas price (increase it from 0 to a higher value)
+  const overrides = {
+    gasPrice: ethers.utils.parseUnits("1", "gwei"), // Set a higher gas price here
+  };
+
+  const botRepo = await BotRepo.deploy(overrides);
 
   console.log("BotRepo deployed to:", botRepo.address);
 }
@@ -17,4 +23,3 @@ main()
     console.error(error);
     process.exit(1);
   });
-

@@ -4,7 +4,8 @@ async function registerMultipleRecords() {
   const BotRepo = await ethers.getContractFactory("BotRepo");
   const signer = await ethers.getSigner();
 
-  const contractAddress = "0xA86219A70D906CC913e447DC2fA46B8C8D0647e7";
+//  const contractAddress = "0xA86219A70D906CC913e447DC2fA46B8C8D0647e7"; // polygon
+  const contractAddress = "0x65d8A5fa2228C1Bca5f9Cfd0A4Cae55453648EdA"; // gnosis
   const botRepo = await BotRepo.attach(contractAddress);
 
   const records = [
@@ -14,9 +15,12 @@ async function registerMultipleRecords() {
   ];
 
   // Register each record
+  const overrides = {
+    gasPrice: ethers.utils.parseUnits("1", "gwei"), // Set a higher gas price here
+  };
   for (const record of records) {
     const { address, isBot, score } = record;
-    await botRepo.connect(signer).register(address, isBot, score);
+    await botRepo.connect(signer).register(address, isBot, score, overrides);
     console.log(`Registered record for address ${address}`);
   }
 }

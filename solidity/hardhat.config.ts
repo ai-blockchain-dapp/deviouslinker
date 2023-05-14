@@ -10,6 +10,10 @@ module.exports = {
       url: "https://rpc-mumbai.maticvigil.com",
       accounts: { mnemonic: mnemonic },
     },
+    gnosisTestnet: {
+      url: "https://rpc.chiadochain.net",
+      accounts: { mnemonic: mnemonic },
+    }
   },
 };
 
