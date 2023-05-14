@@ -7,7 +7,7 @@ from tqdm import tqdm
 api_url = "https://api.polygonscan.com/api"
 
 # PolygonScan API key (replace with your own)
-api_key = "I1ABHF2Z7QKPARYT5YZ1X46WWVE2ENEUT1"
+api_key = ""
 
 # Function to fetch transaction history for an address within a specified date range
 def fetch_transaction_history(address, start_date, end_date):
