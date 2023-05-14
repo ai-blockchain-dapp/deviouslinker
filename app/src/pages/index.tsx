@@ -4,6 +4,7 @@ import { useState } from 'react';
 import logo from "../../public/DEVIOUSLINKER.png";
 import { Poppins } from "next/font/google";
 import { Box, Typography, TextField, Button, Tooltip, Grid, Dialog } from "@mui/material";
+import AirStack from "../components/AirStack";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -126,7 +127,10 @@ You can check any address that is associated with bot activities or multi-accoun
               </Box>
             ) : (
               searched ? (
+                <>
                 <p>No BotCluster found.</p>
+                <AirStack address={address} />
+                </>
               ) : (
                 <p></p>
               )

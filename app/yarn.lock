@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@airstack/airstack-react@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@airstack/airstack-react/-/airstack-react-0.2.1.tgz#9b728fa85d36e3f04c41ad32a33a79c6346cd972"
+  integrity sha512-7x474vJMJznu/mLqi7XPiA7c0VRGsOETHj5wA3jSuvJBgggnL9LvYjVs4MQFEVuO/rlK6aS5F0QReSnrzRINaw==
+
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
